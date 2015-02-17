@@ -4,7 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
-public class AlertDialogManager {
+public class AlertManager {
 	/**
 	 * Function to display simple Alert Dialog
 	 * @param context - application context

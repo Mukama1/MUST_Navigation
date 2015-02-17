@@ -1,18 +1,12 @@
 package com.example.mukama.must_navigation;
 
-import android.app.AlertDialog;
-import android.app.FragmentManager;
-import android.hardware.Camera;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
-import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -21,7 +15,7 @@ public class MapsActivity extends FragmentActivity {
     GPSTracker gps;
     Boolean isConnection;
     ConnectionDetector connection;
-    AlertDialogManager alert=new AlertDialogManager();
+    AlertManager alert=new AlertManager();
     GoogleMapOptions options = new GoogleMapOptions();
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     //private MapView mapView;
@@ -89,8 +83,11 @@ public class MapsActivity extends FragmentActivity {
             if(gps.canGetLocation()) {
                 // the methods which are being applied getLatitude and getLongitude are being used to get the current location of the user
                // mMap.getCameraPosition().zoom(13);
-                mMap.addMarker(new MarkerOptions().position(new LatLng(gps.getLatitude(), gps.getLongitude())).title("Marker"));
-                mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+                // the initial zoom size will be  18.0f
+                //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(gps.getLatitude(),gps.getLongitude()),13.9f));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(gps.getLatitude(),gps.getLongitude()),18.0f));
+                mMap.addMarker(new MarkerOptions().position(new LatLng(gps.getLatitude(), gps.getLongitude())).title("You"));
+                mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
                 mMap.getUiSettings().isZoomControlsEnabled();
 
                // CameraPosition cameraPosition=new CameraPosition.Builder().target(new LatLng(gps.getLatitude(), gps.getLongitude())).zoom(100).build();
