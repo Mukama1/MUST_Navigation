@@ -7,6 +7,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -86,7 +87,12 @@ public class MapsActivity extends FragmentActivity {
                 // the initial zoom size will be  18.0f
                 //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(gps.getLatitude(),gps.getLongitude()),13.9f));
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(gps.getLatitude(),gps.getLongitude()),18.0f));
-                mMap.addMarker(new MarkerOptions().position(new LatLng(gps.getLatitude(), gps.getLongitude())).title("You"));
+                mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(gps.getLatitude(), gps.getLongitude()))
+                        .title("You")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.you))
+                        .snippet("Yourself"));
+                mMap.addMarker(new MarkerOptions().position(new LatLng(-0.606946, 30.682165)).title("Lecture Roo"));
                 mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
                 mMap.getUiSettings().isZoomControlsEnabled();
 
