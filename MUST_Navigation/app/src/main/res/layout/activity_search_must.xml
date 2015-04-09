@@ -10,16 +10,17 @@
     android:weightSum="100"
     android:orientation="horizontal">
     <Spinner
-        android:layout_width="265dp"
-        android:layout_height="132dp"
+        android:layout_width="fill_parent"
+        android:layout_weight="30"
+        android:layout_height="wrap_content"
         android:id="@+id/spinner"
         android:entries="@array/search_list"
         android:layout_gravity="center_horizontal" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="141.94"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="70"
         android:text="Search"
         android:id="@+id/button" />
     </LinearLayout>
