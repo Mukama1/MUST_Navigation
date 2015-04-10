@@ -1,22 +1,25 @@
 package com.example.mukama.must_navigation;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.Spinner;
 
 import com.google.android.gms.internal.in;
 
 
-public class SearchMUST extends ActionBarActivity {
+public class SearchMUST extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_search_must);
         Button searchBtn=(Button) findViewById(R.id.searchBtn);
         final Spinner searchList=(Spinner) findViewById(R.id.searchSpinner);

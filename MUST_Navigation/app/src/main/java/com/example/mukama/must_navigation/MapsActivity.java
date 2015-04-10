@@ -110,8 +110,12 @@ public class MapsActivity extends FragmentActivity {
                     lat=myCordinateLocation.blockLat;
                     Toast.makeText(getApplicationContext(),"Showing: "+mySearchList,Toast.LENGTH_LONG).show();
                     for(int i=0;i<lat.length;i++){
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(myCordinateLocation.blockLat[i], myCordinateLocation.blockLong[i])).title(myCordinateLocation.blockNames[i].toString())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.lecture_rooms)));
+                        mMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(myCordinateLocation.blockLat[i], myCordinateLocation.blockLong[i]))
+                                .title(myCordinateLocation.blockNames[i].toString())
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.lecture_rooms))
+                                .snippet(myCordinateLocation.officeHolder[i]));
+
                     }
                 }else if (mySearchList.equals("Offices")){
                 //loop through coordinates for offices
@@ -122,7 +126,9 @@ public class MapsActivity extends FragmentActivity {
                     for(int i=0;i<lat.length;i++){
 //                        mMap.addMarker(new MarkerOptions().position(new LatLng(-0.616510, 30.656522)).title("Office One")
 //                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.office)));
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(myCordinateLocation.officeLat[i], myCordinateLocation.officeLong[i])).title(myCordinateLocation.officeNames[i].toString())
+                        mMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(myCordinateLocation.officeLat[i], myCordinateLocation.officeLong[i]))
+                                .title(myCordinateLocation.officeNames[i].toString())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.office)));
                     }
                 }else if (mySearchList.equals("MUST Canteens")){
@@ -130,7 +136,9 @@ public class MapsActivity extends FragmentActivity {
                     lat=myCordinateLocation.cateenLat;
                     Toast.makeText(getApplicationContext(),"Showing: "+mySearchList,Toast.LENGTH_LONG).show();
                     for(int i=0;i<lat.length;i++){
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(myCordinateLocation.blockLat[i], myCordinateLocation.blockLong[i])).title(myCordinateLocation.blockNames[i].toString())
+                        mMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(myCordinateLocation.cateenLat[i], myCordinateLocation.cateenLong[i]))
+                                .title(myCordinateLocation.canteenNames[i].toString())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.office)));
                     }
 

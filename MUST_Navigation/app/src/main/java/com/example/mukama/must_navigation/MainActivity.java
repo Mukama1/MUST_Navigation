@@ -1,55 +1,41 @@
 package com.example.mukama.must_navigation;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 
 
-public class MainActivity extends ActionBarActivity {
-
+public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-        Thread timeout=new Thread(){
-            @Override
-            public void start() {
+
+        Thread timer = new Thread(){
+            public void run(){
                 try {
-                    sleep(5000);
-                }catch (InterruptedException e)
-                {
+                    sleep(10000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
                     e.printStackTrace();
-                }finally {
-                Intent startSearch=new Intent(getApplicationContext(),SearchMUST.class);
-                    startActivity(startSearch);
+                }
+                finally{
+
+                    startActivity(new Intent(getApplicationContext(),SearchMUST.class));
                 }
             }
         };
-        timeout.start();
+        timer.start();
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    protected void onPause() {
+        // TODO Auto-generated method stub
+        super.onPause();
+        finish();
     }
 }

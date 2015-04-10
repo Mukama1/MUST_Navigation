@@ -14,5 +14,6 @@
         <item>Faculties</item>
         <item>MUST Canteens</item>
     </string-array>
-
+    <string name="developers">Racheal and Yassin</string>
+    <string name="copyright"> © MUST Navigator 2015</string>
 </resources>
