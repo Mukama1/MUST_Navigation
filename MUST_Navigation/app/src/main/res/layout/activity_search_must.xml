@@ -13,7 +13,7 @@
         android:layout_width="fill_parent"
         android:layout_weight="30"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"
+        android:id="@+id/searchSpinner"
         android:entries="@array/search_list"
         android:layout_gravity="center_horizontal" />
 
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="70"
         android:text="Search"
-        android:id="@+id/button" />
+        android:id="@+id/searchBtn" />
     </LinearLayout>
 
 

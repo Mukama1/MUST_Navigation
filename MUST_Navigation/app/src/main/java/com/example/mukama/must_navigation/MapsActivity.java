@@ -2,6 +2,7 @@ package com.example.mukama.must_navigation;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,7 +14,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity {
     // GPS Location
-    GPSTracker gps;
+    String mySearchList;
+    GPSTracker gps=new GPSTracker(this);
+    private Double lat[]={};
+    private Double longt[]={};
+    String myTitle[]={};
+    StoreCoordinates myCordinateLocation;
     Boolean isConnection;
     ConnectionDetector connection;
     AlertManager alert=new AlertManager();
@@ -24,6 +30,10 @@ public class MapsActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        //getting search parameter from the previous class
+        Bundle extras=getIntent().getExtras();
+        mySearchList=extras.getString("List_Name");
+        Toast.makeText(getApplicationContext(),"My Search List: "+mySearchList,Toast.LENGTH_LONG).show();
         //mapView=(MapView) findViewById(R.id.map);
         //mapView.setBuiltInZoomControls(true);
 
@@ -92,8 +102,40 @@ public class MapsActivity extends FragmentActivity {
                         .title("You")
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.you))
                         .snippet("Yourself"));
-                mMap.addMarker(new MarkerOptions().position(new LatLng(-0.606946, 30.682165)).title("Lecture Roo"));
-                mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+
+
+
+                if(mySearchList.equals("Faculties")) {
+                    //loop through cordinates for faculties
+                    lat=myCordinateLocation.blockLat;
+                    Toast.makeText(getApplicationContext(),"Showing: "+mySearchList,Toast.LENGTH_LONG).show();
+                    for(int i=0;i<lat.length;i++){
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(myCordinateLocation.blockLat[i], myCordinateLocation.blockLong[i])).title(myCordinateLocation.blockNames[i].toString())
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.lecture_rooms)));
+                    }
+                }else if (mySearchList.equals("Offices")){
+                //loop through coordinates for offices
+                    lat=myCordinateLocation.officeLat;
+//                    longt=myCordinateLocation.officeLat;
+//                    myTitle=myCordinateLocation.officeNames;
+                    Toast.makeText(getApplicationContext(),"Showing: "+mySearchList,Toast.LENGTH_LONG).show();
+                    for(int i=0;i<lat.length;i++){
+//                        mMap.addMarker(new MarkerOptions().position(new LatLng(-0.616510, 30.656522)).title("Office One")
+//                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.office)));
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(myCordinateLocation.officeLat[i], myCordinateLocation.officeLong[i])).title(myCordinateLocation.officeNames[i].toString())
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.office)));
+                    }
+                }else if (mySearchList.equals("MUST Canteens")){
+                    //loop through cordinates for offices
+                    lat=myCordinateLocation.cateenLat;
+                    Toast.makeText(getApplicationContext(),"Showing: "+mySearchList,Toast.LENGTH_LONG).show();
+                    for(int i=0;i<lat.length;i++){
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(myCordinateLocation.blockLat[i], myCordinateLocation.blockLong[i])).title(myCordinateLocation.blockNames[i].toString())
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.office)));
+                    }
+
+                }
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 mMap.getUiSettings().isZoomControlsEnabled();
 
                // CameraPosition cameraPosition=new CameraPosition.Builder().target(new LatLng(gps.getLatitude(), gps.getLongitude())).zoom(100).build();
