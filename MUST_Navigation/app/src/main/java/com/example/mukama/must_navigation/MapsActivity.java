@@ -91,7 +91,8 @@ public class MapsActivity extends FragmentActivity {
             return;
         }
         else {
-            if(gps.canGetLocation()) {
+            if(gps.canGetLocation())
+            {
                 // the methods which are being applied getLatitude and getLongitude are being used to get the current location of the user
                // mMap.getCameraPosition().zoom(13);
                 // the initial zoom size will be  18.0f
@@ -104,7 +105,7 @@ public class MapsActivity extends FragmentActivity {
                         .snippet("Yourself"));
 
 
-
+            //showing faculties
                 if(mySearchList.equals("Faculties")) {
                     //loop through cordinates for faculties
                     lat=myCordinateLocation.blockLat;
@@ -117,7 +118,10 @@ public class MapsActivity extends FragmentActivity {
                                 .snippet(myCordinateLocation.officeHolder[i]));
 
                     }
-                }else if (mySearchList.equals("Offices")){
+
+                }
+                //showing offices
+                else if (mySearchList.equals("Offices")){
                 //loop through coordinates for offices
                     lat=myCordinateLocation.officeLat;
 //                    longt=myCordinateLocation.officeLat;
@@ -131,23 +135,76 @@ public class MapsActivity extends FragmentActivity {
                                 .title(myCordinateLocation.officeNames[i].toString())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.office)));
                     }
-                }else if (mySearchList.equals("MUST Canteens")){
+                }
+                //showing canteens
+                else if (mySearchList.equals("MUST Canteens")) {
                     //loop through cordinates for offices
-                    lat=myCordinateLocation.cateenLat;
-                    Toast.makeText(getApplicationContext(),"Showing: "+mySearchList,Toast.LENGTH_LONG).show();
-                    for(int i=0;i<lat.length;i++){
+                    lat = myCordinateLocation.cateenLat;
+                    Toast.makeText(getApplicationContext(), "Showing: " + mySearchList, Toast.LENGTH_LONG).show();
+                    for (int i = 0; i < lat.length; i++) {
                         mMap.addMarker(new MarkerOptions()
                                 .position(new LatLng(myCordinateLocation.cateenLat[i], myCordinateLocation.cateenLong[i]))
                                 .title(myCordinateLocation.canteenNames[i].toString())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.office)));
                     }
-
                 }
+                //showing hostels
+                    else if(mySearchList.equals("Hostels"))
+                    {
+                        lat = myCordinateLocation.hostelLat;
+                        Toast.makeText(getApplicationContext(), "Showing: " + mySearchList, Toast.LENGTH_LONG).show();
+                        for (int i = 0; i < lat.length; i++) {
+                            mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(myCordinateLocation.hostelLat[i], myCordinateLocation.hostelLong[i]))
+                                    .title(myCordinateLocation.hostelNames[i].toString())
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.office)));
+                        }
+                    }
+                //showing churches
+                else if(mySearchList.equals("Churches"))
+                {
+                    lat = myCordinateLocation.churchLat;
+                    Toast.makeText(getApplicationContext(), "Showing: " + mySearchList, Toast.LENGTH_LONG).show();
+                    for (int i = 0; i < lat.length; i++) {
+                        mMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(myCordinateLocation.churchLat[i], myCordinateLocation.churchLong[i]))
+                                .title(myCordinateLocation.churchNames[i].toString())
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.office)));
+                    }
+                }
+//showing others on the map
+                else if(mySearchList.equals("Others"))
+                {
+                    lat = myCordinateLocation.otherLat;
+                    Toast.makeText(getApplicationContext(), "Showing: " + mySearchList, Toast.LENGTH_LONG).show();
+                    for (int i = 0; i < lat.length; i++) {
+                        mMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(myCordinateLocation.otherLat[i], myCordinateLocation.otherLong[i]))
+                                .title(myCordinateLocation.otherNames[i].toString())
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.office)));
+                    }
+                }
+//lecture rooms
+                else if(mySearchList.equals("Lectures"))
+                {
+                    lat = myCordinateLocation.lecLat;
+                    Toast.makeText(getApplicationContext(), "Showing: " + mySearchList, Toast.LENGTH_LONG).show();
+                    for (int i = 0; i < lat.length; i++) {
+                        mMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(myCordinateLocation.lecLat[i], myCordinateLocation.lecLong[i]))
+                                .title(myCordinateLocation.lecNames[i].toString())
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.office)));
+                    }
+                }
+
+
                 mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 mMap.getUiSettings().isZoomControlsEnabled();
 
                // CameraPosition cameraPosition=new CameraPosition.Builder().target(new LatLng(gps.getLatitude(), gps.getLongitude())).zoom(100).build();
-            }else{
+            }
+            else
+            {
                 alert.showAlertDialog(this,"GPS Setting","Please Enable Your GPS from Setting Such That We Locate Where You Are",false);
                 return;
             }

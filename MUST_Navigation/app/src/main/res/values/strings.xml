@@ -3,7 +3,7 @@
 
     <string name="app_name">MUST_Navigation</string>
     <string name="title_activity_maps">Map</string>
-    <string name="maps_key">AIzaSyBzTAnDuQtOH3dTKrLl_q3ewMmUxwbUXcY</string>
+    <string name="maps_key">AIzaSyB84LXnsdWvO4ysU3nNlavXJK8cU8XOJD4</string>
     <string name="main_label">MUST Map</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="hello_world">Hello world!</string>
