@@ -21,17 +21,17 @@ public class SearchMUST extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_search_must);
-        Button searchBtn=(Button) findViewById(R.id.searchBtn);
-        final Spinner searchList=(Spinner) findViewById(R.id.searchSpinner);
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),MapsActivity.class);
-                String spinnerValue=searchList.getSelectedItem().toString();
-                intent.putExtra("List_Name",spinnerValue);
-                startActivity(intent);
-            }
-        });
+//        Button searchBtn=(Button) findViewById(R.id.searchBtn);
+//        final Spinner searchList=(Spinner) findViewById(R.id.searchSpinner);
+//        searchBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent=new Intent(getApplicationContext(),MapsActivity.class);
+//                String spinnerValue=searchList.getSelectedItem().toString();
+//                intent.putExtra("List_Name",spinnerValue);
+//                startActivity(intent);
+//            }
+//        });
     }
 
 

@@ -39,9 +39,12 @@
             android:label="@string/title_activity_main" >
         </activity>
         <activity
-            android:name=".SearchMUST"
-            android:label="@string/title_activity_search_must" >
+            android:name=".MainMenu"
+            android:label="Menu" >
         </activity>
+        <activity
+            android:name=".Help"
+            android:label="Help"/>
     </application>
 
 </manifest>

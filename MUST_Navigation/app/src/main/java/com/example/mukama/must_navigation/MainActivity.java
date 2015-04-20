@@ -19,14 +19,14 @@ public class MainActivity extends Activity {
         Thread timer = new Thread(){
             public void run(){
                 try {
-                    sleep(10000);
+                    sleep(5000);
                 } catch (InterruptedException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
                 finally{
 
-                    startActivity(new Intent(getApplicationContext(),SearchMUST.class));
+                    startActivity(new Intent(getApplicationContext(),MainMenu.class));
                 }
             }
         };
