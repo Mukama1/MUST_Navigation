@@ -25,7 +25,7 @@ public class MainMenu extends Activity implements AdapterView.OnItemClickListene
 		
 		//set grid view item
 		Bitmap officeIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.office_icon);
-		Bitmap lectureRmIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.lecture_rm);
+		Bitmap lectureRmIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.lecture_rm2);
         Bitmap DptIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.departments);
         Bitmap hostelIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.hostel);
         Bitmap rubbishIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.rubbish_pits);

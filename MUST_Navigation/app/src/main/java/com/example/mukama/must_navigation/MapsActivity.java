@@ -2,6 +2,8 @@ package com.example.mukama.must_navigation;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -10,6 +12,7 @@ import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity {
@@ -91,18 +94,19 @@ public class MapsActivity extends FragmentActivity {
             return;
         }
         else {
-            if(gps.canGetLocation())
+            if(gps.isGPSEnabled)
             {
                 // the methods which are being applied getLatitude and getLongitude are being used to get the current location of the user
                // mMap.getCameraPosition().zoom(13);
                 // the initial zoom size will be  18.0f
                 //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(gps.getLatitude(),gps.getLongitude()),13.9f));
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(gps.getLatitude(),gps.getLongitude()),18.0f));
-                mMap.addMarker(new MarkerOptions()
+                Marker marker=mMap.addMarker(new MarkerOptions()
                         .position(new LatLng(gps.getLatitude(), gps.getLongitude()))
                         .title("You")
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.you))
                         .snippet("Yourself"));
+                marker.showInfoWindow();
 
 
             //showing faculties
@@ -111,11 +115,62 @@ public class MapsActivity extends FragmentActivity {
                     lat=myCordinateLocation.blockLat;
                     Toast.makeText(getApplicationContext(),"Showing: "+mySearchList,Toast.LENGTH_LONG).show();
                     for(int i=0;i<lat.length;i++){
-                        mMap.addMarker(new MarkerOptions()
+                      mMap.addMarker(new MarkerOptions()
                                 .position(new LatLng(myCordinateLocation.blockLat[i], myCordinateLocation.blockLong[i]))
                                 .title(myCordinateLocation.blockNames[i].toString())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.lecture_rooms))
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.department_mapicon))
                                 .snippet(myCordinateLocation.officeHolder[i]));
+                        //marker.showInfoWindow();
+//                        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+//                            @Override
+//                            public View getInfoWindow(Marker marker) {
+//                                return null;
+//                            }
+//
+//                            @Override
+//                            public View getInfoContents(Marker arg0) {
+//                                // Getting view from the layout file info_window_layout
+//                                View v = getLayoutInflater().inflate(R.layout.windowlayout, null);
+//
+//                                // Getting the position from the marker
+//                                LatLng latLng = arg0.getPosition();
+//
+//                                // Getting reference to the TextView to set latitude
+//                                TextView tvLat = (TextView) v.findViewById(R.id.tv_lat);
+//
+//                                // Getting reference to the TextView to set longitude
+//                                TextView tvLng = (TextView) v.findViewById(R.id.tv_lng);
+//
+//                                // Setting the latitude
+//                                tvLat.setText("Latitude:" + myCordinateLocation.officeHolder[i]);
+//
+//                                // Setting the longitude
+//                                tvLng.setText("Longitude:"+ latLng.longitude);
+//                                return v;
+//                            }
+//                        });
+//                        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+//                            @Override
+//                            public void onMapClick(LatLng arg0) {
+//                                // Clears any existing markers from the GoogleMap
+//
+//
+//                                // Creating an instance of MarkerOptions to set position
+//                                MarkerOptions markerOptions = new MarkerOptions();
+//
+//                                // Setting position on the MarkerOptions
+//                                markerOptions.position(arg0);
+//
+//                                // Animating to the currently touched position
+//                                mMap.animateCamera(CameraUpdateFactory.newLatLng(arg0));
+//
+//                                // Adding marker on the GoogleMap
+//                                Marker marker = mMap.addMarker(markerOptions);
+//
+//                                // Showing InfoWindow on the GoogleMap
+//                                marker.showInfoWindow();
+//                            }
+//                        });
 
                     }
 
@@ -133,7 +188,7 @@ public class MapsActivity extends FragmentActivity {
                         mMap.addMarker(new MarkerOptions()
                                 .position(new LatLng(myCordinateLocation.officeLat[i], myCordinateLocation.officeLong[i]))
                                 .title(myCordinateLocation.officeNames[i].toString())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.office)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.office_mapicon)));
                     }
                 }
                 //showing canteens
@@ -145,7 +200,7 @@ public class MapsActivity extends FragmentActivity {
                         mMap.addMarker(new MarkerOptions()
                                 .position(new LatLng(myCordinateLocation.cateenLat[i], myCordinateLocation.cateenLong[i]))
                                 .title(myCordinateLocation.canteenNames[i].toString())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.office)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.canteen_mapicon)));
                     }
                 }
                 //showing hostels
@@ -157,7 +212,8 @@ public class MapsActivity extends FragmentActivity {
                             mMap.addMarker(new MarkerOptions()
                                     .position(new LatLng(myCordinateLocation.hostelLat[i], myCordinateLocation.hostelLong[i]))
                                     .title(myCordinateLocation.hostelNames[i].toString())
-                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.office)));
+                                    .snippet(myCordinateLocation.hostelResidents[i])
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.hostel2_mapicon)));
                         }
                     }
                 //showing churches
@@ -169,7 +225,7 @@ public class MapsActivity extends FragmentActivity {
                         mMap.addMarker(new MarkerOptions()
                                 .position(new LatLng(myCordinateLocation.churchLat[i], myCordinateLocation.churchLong[i]))
                                 .title(myCordinateLocation.churchNames[i].toString())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.office)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.church2)));
                     }
                 }
 //showing others on the map
@@ -181,7 +237,7 @@ public class MapsActivity extends FragmentActivity {
                         mMap.addMarker(new MarkerOptions()
                                 .position(new LatLng(myCordinateLocation.otherLat[i], myCordinateLocation.otherLong[i]))
                                 .title(myCordinateLocation.otherNames[i].toString())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.office)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.others_mapicon)));
                     }
                 }
 //lecture rooms
@@ -193,9 +249,36 @@ public class MapsActivity extends FragmentActivity {
                         mMap.addMarker(new MarkerOptions()
                                 .position(new LatLng(myCordinateLocation.lecLat[i], myCordinateLocation.lecLong[i]))
                                 .title(myCordinateLocation.lecNames[i].toString())
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.office)));
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.lecture_rm_mapicon)));
                     }
                 }
+
+                //toilets
+                else if(mySearchList.equals("Toilets"))
+                {
+                    lat = myCordinateLocation.toiletLat;
+                    Toast.makeText(getApplicationContext(), "Showing: " + mySearchList, Toast.LENGTH_LONG).show();
+                    for (int i = 0; i < lat.length; i++) {
+                        mMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(myCordinateLocation.toiletLat[i], myCordinateLocation.toiletLong[i]))
+                                .title(myCordinateLocation.toiletNames[i].toString())
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.toilets_mapicon)));
+                    }
+                }
+
+                else if(mySearchList.equals("Rubbish"))
+                {
+                    lat = myCordinateLocation.dustLat;
+                    Toast.makeText(getApplicationContext(), "Showing: " + mySearchList, Toast.LENGTH_LONG).show();
+                    for (int i = 0; i < lat.length; i++) {
+                        mMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(myCordinateLocation.dustLat[i], myCordinateLocation.dustLong[i]))
+                                .title(myCordinateLocation.dustNames[i].toString())
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.trash_mapicon)));
+                    }
+                }
+
+
 
 
                 mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -205,7 +288,8 @@ public class MapsActivity extends FragmentActivity {
             }
             else
             {
-                alert.showAlertDialog(this,"GPS Setting","Please Enable Your GPS from Setting Such That We Locate Where You Are",false);
+                //alert.showAlertDialog(this,"GPS Setting","Please Enable Your GPS from Setting Such That We Locate Where You Are",false);
+                gps.showSettingsAlert();
                 return;
             }
         }

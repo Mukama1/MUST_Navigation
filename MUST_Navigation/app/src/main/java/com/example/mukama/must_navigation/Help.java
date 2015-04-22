@@ -34,7 +34,7 @@ public class Help extends Activity {
                 "<i>" +
                 "This app has been designed by <br />" +
                 "<b>" +
-                R.string.developers +
+                "Racheal and Yassin" +
                 "</b><br />" +
                 "Under the supervision of" +
                 "<b>Bamutura</b>" +
